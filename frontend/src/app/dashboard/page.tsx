@@ -8,7 +8,7 @@ import { useColorTheme } from "../../context/color-theme-context";
 export default function DashboardPage() {
   const { colorTheme } = useColorTheme();
 
-  // Map the selected color to a Tailwind text class
+  // Helper to get the accent color class based on the selected theme
   const getAccentClass = (theme: string) => {
     const map: Record<string, string> = {
       purple: "text-purple-600",
@@ -31,7 +31,7 @@ export default function DashboardPage() {
             <span className={getAccentClass(colorTheme)}>✦</span> Dexter
           </h1>
         </div>
-        
+
         <div className="px-4 mb-4">
           <button className="w-full flex items-center justify-between bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300">
             <span>Workspace</span>
@@ -40,15 +40,15 @@ export default function DashboardPage() {
         </div>
 
         <nav className="flex-1 px-4 space-y-1">
-          <Link 
-            href="/dashboard" 
+          <Link
+            href="/dashboard"
             className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium"
           >
             <span className="text-gray-500 dark:text-gray-400">📋</span>
             Tasks
           </Link>
-          <Link 
-            href="#" 
+          <Link
+            href="#"
             className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
             <span className="text-gray-400">📁</span>
@@ -77,10 +77,10 @@ export default function DashboardPage() {
           <div className="flex items-center gap-3">
             <button className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">🔍</button>
             <button className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">⊞</button>
-            
+
             {/* Theme Toggle Button */}
             <ThemeToggle />
-            
+
             <button className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
               + Add Task
             </button>
@@ -117,8 +117,8 @@ function ColorPicker() {
           key={c.id}
           onClick={() => setColorTheme(c.id as any)}
           className={`w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 transition-all ${
-            colorTheme === c.id 
-              ? "ring-2 ring-offset-2 ring-gray-400 dark:ring-gray-500" 
+            colorTheme === c.id
+              ? "ring-2 ring-offset-2 ring-gray-400 dark:ring-gray-500"
               : "hover:scale-110"
           }`}
           style={{ backgroundColor: c.hex }}
