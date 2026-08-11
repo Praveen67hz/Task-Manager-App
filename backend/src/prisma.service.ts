@@ -1,26 +1,43 @@
-import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { Pool } from 'pg';
+import "dotenv/config";
+
+import {
+  Injectable,
+  OnModuleDestroy,
+  OnModuleInit,
+} from "@nestjs/common";
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 @Injectable()
-export class PrismaService implements OnModuleInit, OnModuleDestroy {
-  public client: PrismaClient;
-
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   constructor() {
-    // Set PostgreSQL connection pool
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-    const adapter = new PrismaPg(pool);
-    
-    // Passing adapter to PrismaClient
-    this.client = new PrismaClient({ adapter });
+    const databaseUrl = process.env.DATABASE_URL;
+
+    if (!databaseUrl) {
+      throw new Error("DATABASE_URL is not defined");
+    }
+
+    // Create the PostgreSQL adapter using the database connection URL.
+    const adapter = new PrismaPg({
+      connectionString: databaseUrl,
+    });
+
+    // Initialize Prisma Client with the PostgreSQL adapter.
+    super({
+      adapter,
+    });
   }
 
+  // Connect to the database when the NestJS application starts.
   async onModuleInit() {
-    await this.client.$connect();
+    await this.$connect();
   }
 
+  // Disconnect from the database when the NestJS application shuts down.
   async onModuleDestroy() {
-    await this.client.$disconnect();
+    await this.$disconnect();
   }
 }
