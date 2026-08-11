@@ -3,8 +3,8 @@
 A full-stack Task Management application built as part of a technical assessment. The application allows users to log in as a guest, manage tasks with full CRUD operations, and supports dynamic theming (Dark/Light mode) with a customizable accent color picker.
 
 🔗 **Live Demo:** 
-- **Frontend:** [https://task-manager-app.vercel.app](https://task-manager-app.vercel.app)
-- **Backend API:** [https://task-manager-backend.onrender.com](https://task-manager-backend.onrender.com)
+- **Frontend: - https://task-manager-app-lake-two.vercel.app/
+- **Backend API: - https://task-manager-backend-hqnc.onrender.com/
 
 ---
 
